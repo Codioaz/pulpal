@@ -1,11 +1,9 @@
 <?php
 
-
 namespace Kubpro\PulPal;
 
 
 use Kubpro\PulPal\Helpers\Helper;
-use phpDocumentor\Reflection\Types\Integer;
 
 class PulPalService
 {
@@ -14,18 +12,27 @@ class PulPalService
     public $url;
 
     public $merchantId;
+
     public $epochTime;
 
-    public function generateUrl(){
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function generateUrl(): string
+    {
         $this->checkParametrs();
         $this->generateConfigs();
 
         return $this->getUrl() . '?' . http_build_query($this->params());
     }
 
-
-    public function params(){
-        return [
+    /**
+     * @return array
+     */
+    public function params(): array
+    {
+        $params = [
             'merchantId'        => $this->getMerchantId(),
             'price'             => $this->getPrice(),
             'repeatable'        => config('pulpal.repeatable') ? "ture" : "false",
@@ -39,10 +46,17 @@ class PulPalService
             'email'             => $this->getEmail(),
             'signature2'        => $this->signature(),
         ];
+
+        if (! empty($this->getProductUniqueCode()))
+            $params['productUniqueCode'] = $this->getProductUniqueCode();
+
+        return $params;
     }
 
-
-    private function signature()
+    /**
+     * @return string
+     */
+    private function signature(): string
     {
         $signature =  $this->getName('en')
             . $this->getName('az')
@@ -56,18 +70,14 @@ class PulPalService
             . $this->getEpochTime()
             . config('pulpal.salt');
 
-
-
         return sha1($signature);
     }
 
 
-
-
-    public function generateConfigs(){
+    public function generateConfigs(): void
+    {
         $this->merchantId   = config('pulpal.merchant.'.app()->environment());
         $this->url          = config('pulpal.url.'.app()->environment());
         $this->setEpochTime();
     }
-
 }

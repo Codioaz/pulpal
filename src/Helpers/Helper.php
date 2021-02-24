@@ -13,6 +13,8 @@ trait Helper
 
     public $externalId;
 
+    public $productUniqueCode;
+
     public $name = [
         'az' => null,
         'en' => null,
@@ -48,6 +50,16 @@ trait Helper
         }
     }
 
+
+    public function getProductUniqueCode(){
+
+        return $this->productUniqueCode;
+    }
+    public function setProductUniqueCode($productUniqueCode){
+        $this->productUniqueCode = $productUniqueCode;
+
+        return $this;
+    }
 
 
     private function setEpochTime()
