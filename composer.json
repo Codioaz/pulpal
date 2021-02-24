@@ -1,0 +1,33 @@
+{
+    "name": "kubpro/pulpal",
+    "description": "PulPal payment gateway",
+    "type": "library",
+    "license": "Brendfoni",
+    "authors": [
+        {
+            "name": "Rauf Abbas",
+            "email": "info@kubpro.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.3",
+        "laravel/framework": "^8.0",
+        "guzzlehttp/guzzle": "^7.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kubpro\\PulPal\\" : "src/"
+        }
+    },
+    "extra": {
+        "laravel" : {
+            "providers" : [
+                "Kubpro\\PulPal\\Providers\\PulPalServiceProvider"
+            ],
+            "aliases": {
+                "PulPal": "Kubpro\\PulPal\\Facades\\PulPal"
+            }
+        }
+    }
+}
