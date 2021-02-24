@@ -20,9 +20,6 @@ class PulPalService
         $this->checkParametrs();
         $this->generateConfigs();
 
-//        dd($this->params());
-
-        dump(config('pulpal.salt'));
         return $this->getUrl() . '?' . http_build_query($this->params());
     }
 
