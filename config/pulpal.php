@@ -1,18 +1,5 @@
 <?php
-/*
 
- private $testMerchantId = 489;
-    private $testUrl = 'https://pay-dev.pulpal.az/payment';
-
-    private $prodMerchantId = 477;
-    private $prodUrl = 'https://pay.pulpal.az/payment';
-
-    private $salt = 'dy!HV2@k38c#2w&m@iZQ';
-    private $repeatable = 'false';
-    public static $key = 'p2@lz$asj9L@XAq#lM$4';
-
-
- */
 return [
 
     'merchant' => [
@@ -24,6 +11,7 @@ return [
         'local'         => env('PULPAL_TEST_URL', 'https://pay-dev.pulpal.az/payment'),
         'production'    => env('PULPAL_URL', 'https://pay.pulpal.az/payment'),
     ],
+
 
     'repeatable'    => env('PULPAL_REPEATABLE', false),
 

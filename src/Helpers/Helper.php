@@ -11,6 +11,8 @@ trait Helper
 
     public $email;
 
+    public $externalId;
+
     public $name = [
         'az' => null,
         'en' => null,
@@ -22,6 +24,7 @@ trait Helper
         'en' => null,
         'ru' => null,
     ];
+
 
 
     /**
@@ -40,8 +43,62 @@ trait Helper
         if(empty($this->price)){
             throw new \Exception('Price should be number, you can use this function setPrice() ');
         }
+        if(empty($this->externalId)){
+            throw new \Exception('Please fill externalId ');
+        }
     }
 
+
+
+    private function setEpochTime()
+    {
+        $this->epochTime = intval((time()*1000) / 300000);
+    }
+
+    private function getEpochTime()
+    {
+        return $this->epochTime;
+    }
+
+
+    public function getName($locale){
+        return $this->name[$locale];
+    }
+
+    public function getDescription($locale){
+        return $this->description[$locale];
+    }
+
+
+    public function getMerchantId(): int
+    {
+        return $this->merchantId;
+    }
+
+    public function getUrl(){
+        return $this->url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExternalId(){
+        return $this->externalId;
+    }
+
+
+    public function setExternalId($externalId){
+        $this->externalId = $externalId;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getEmail(){
+        return $this->email;
+    }
 
     /**
      * @param null $email
@@ -50,6 +107,11 @@ trait Helper
     public function setEmail($email = null){
         $this->email = $email;
         return $this;
+    }
+
+
+    public function getPrice(){
+        return $this->price;
     }
 
     /**
